@@ -36,8 +36,10 @@
               <input
                 type="number"
                 class="input input-bordered w-full max-w-xs input-primary input-sm"
-                onkeyup="calculate(1)"
+                oninput="calculate(1)"
                 id="runtime1"
+                value="0"
+                onblur="checkInputValue(1)"
               />
             </div>
             <div>
@@ -88,8 +90,10 @@
               <input
                 type="number"
                 class="input input-bordered w-full max-w-xs input-primary input-sm"
-                onkeyup="calculate(2)"
+                oninput="calculate(2)"
                 id="runtime2"
+                value="0"
+                onblur="checkInputValue(2)"
               />
             </div>
             <div>
@@ -141,8 +145,10 @@
               <input
                 type="number"
                 class="input input-bordered w-full max-w-xs input-primary input-sm"
-                onkeyup="calculate(3)"
+                oninput="calculate(3)"
                 id="runtime3"
+                value="0"
+                onblur="checkInputValue(3)"
               />
             </div>
             <div>
@@ -290,10 +296,19 @@
         totalGas += value;
       }
 
-      let cylinders = Math.ceil(totalGas);
+      let cylinders = Math.ceil(totalGas / 6);
       document.getElementById("totalFluid").value = totalFluid;
       document.getElementById("totalGas").value = totalGas;
       document.getElementById("gasCylinders").value = cylinders;
+    }
+
+    function checkInputValue(i) {
+      //get input
+      let input = document.getElementById(`runtime` + i);
+      if (input.value === "") {
+        input.value = "0";
+        calculate(i);
+      }
     }
   </script>
 </html>
