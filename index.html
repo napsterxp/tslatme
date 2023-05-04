@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <link
@@ -7,79 +8,217 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <label for="runLevel1">Run Level 1</label>
+  <body class="bg-base-200">
+    <div class="p-10">
+      <form>
+        <div class="grid grid-cols-1 gap-2">
+          <!-- 1 -->
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs"
+                onchange="calculate(1)"
+                id="runlevel1"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                onkeyup="calculate(1)"
+                id="runtime1"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="fluid1"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gas1"
+              />
+            </div>
+          </div>
 
-    <select name="runLevel1" id="runLevel1" onchange="calculate1RL">
-      <option value="25">25</option>
-      <option value="50">50</option>
-      <option value="75">75</option>
-      <option value="100">100</option>
-    </select>
+          <!-- 2    -->
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs"
+                onchange="calculate(2)"
+                id="runlevel2"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                onkeyup="calculate(2)"
+                id="runtime2"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="fluid2"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gas2"
+              />
+            </div>
+          </div>
 
-    <label for="runTime1">Run Time 1 (hours)</label>
+          <!-- 3 -->
 
-    <input
-      class="input w-full max-w-xs"
-      type="number"
-      id="runTime1"
-      id="runTime1"
-      onkeyup="calculate1RT()"
-    />
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs"
+                onchange="calculate(3)"
+                id="runlevel3"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                onkeyup="calculate(3)"
+                id="runtime3"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="fluid3"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gas3"
+              />
+            </div>
+          </div>
 
-    <label for="fluid1">Fluid</label>
-    <input
-      class="input w-full max-w-xs"
-      type="number"
-      readonly
-      id="fluid1"
-      name="fluid1"
-    />
+          <!-- TOTALS -->
+          <div class="divider"></div>
 
-    <label for="gas1">Gas</label>
-    <input
-      class="input w-full max-w-xs"
-      type="number"
-      readonly
-      id="gas1"
-      name="gas1"
-    />
+          <div class="grid grid-cols-4 gap-2">
+            <div></div>
+            <div></div>
+            <div>
+              <label class="label">
+                <span class="label-text">Total Fluid (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="totalFluid"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Total Gas (kg)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="totalGas"
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-4 gap-2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>
+              <label class="label">
+                <span class="label-text">No. standard TSL cylinders</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gasCylinders"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </body>
-
   <script>
-    function calculate1RT() {
-      let runtime = parseInt(document.getElementById("runTime1").value);
-      let runLevel = parseInt(document.getElementById("runLevel1").value);
-      if (runtime < 1) {
-        return;
-      } else {
-        let fluidUsed1;
-        let gasUsed1;
-        switch (runLevel) {
-          case 25:
-            fluidUsed1 = 27.5 * runtime;
-            gasUsed1 = 0.09 * runtime;
-            break;
-          case 50:
-            fluidUsed1 = 55 * runtime;
-            gasUsed1 = 0.18 * runtime;
-            break;
-          case 75:
-            fluidUsed1 = 77.5 * runtime;
-            gasUsed1 = 0.27 * runtime;
-            break;
-          case 100:
-            fluidUsed1 = 100 * runtime;
-            gasUsed1 = 0.36 * runtime;
-            break;
-        }
-        console.log({ fluidUsed1 });
-        console.log({ gasUsed1 });
-        document.getElementById("fluid1").value = fluidUsed1;
-        document.getElementById("gas1").value = gasUsed1;
-      }
-    }
-
     //  RL   |   Fluid  |   Gas
     //--------------------------------
     //  25   |   27.5   |   0.09
@@ -87,33 +226,45 @@
     //  75   |   77.5   |   0.27
     //  100  |   100    |   0.36
 
-    function calculate1RL() {
-      let runtime = parseInt(document.getElementById("runTime1").value);
-      let runLevel = parseInt(document.getElementById("runlevel1").value);
+    function calculate(i) {
+      //get runtime from specific cue's runtime input
+      let runtime = parseInt(document.getElementById(`runtime` + i).value);
+      console.log(`runtime ` + i + ` = ` + runtime);
+
+      //get run level from specific cue's run level select input
+      let runlevel = parseInt(document.getElementById(`runlevel` + i).value);
+      console.log(`runlevel ` + i + ` = ` + runlevel);
+
+      // if RT > 1 -> calculate
       if (runtime < 1) {
         return;
       } else {
-        let fluidUsed1;
-        let gasUsed1;
-        switch (runLevel) {
+        let fluidused;
+        let gasused;
+        switch (runlevel) {
           case 25:
-            fluidUsed1 = 27.5 * runtime;
-            gasUsed1 = 0.09 * runtime;
+            fluidused = 27.5 * runtime;
+            gasused = 0.09 * runtime;
             break;
           case 50:
-            fluidUsed1 = 55 * runtime;
-            gasUsed1 = 0.18 * runtime;
+            fluidused = 55 * runtime;
+            gasused = 0.18 * runtime;
             break;
           case 75:
-            fluidUsed1 = 77.5 * runtime;
-            gasUsed1 = 0.27 * runtime;
+            fluidused = 77.5 * runtime;
+            gasused = 0.27 * runtime;
             break;
           case 100:
-            fluidUsed1 = 100 * runtime;
-            gasUsed1 = 0.36 * runtime;
+            fluidused = 100 * runtime;
+            gasused = 0.36 * runtime;
             break;
         }
-        console.log({ fluidUsed1 });
+        console.log({ fluidused });
+        console.log({ gasused });
+        //put fluid and gas values back in specific cue's output boxes
+
+        document.getElementById(`fluid` + i).value = fluidused;
+        document.getElementById(`gas` + i).value = gasused;
       }
     }
   </script>
