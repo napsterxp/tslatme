@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>MDG ATMe Calculator</title>
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css"
       rel="stylesheet"
@@ -9,6 +10,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-base-200">
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a
+          class="btn btn-ghost normal-case text-xl"
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          >MDG ATMe consumption calculator</a
+        >
+      </div>
+      <div class="flex-none">
+        <p>Logic by Adam Davies. Site by Sam Clay</p>
+      </div>
+    </div>
     <div class="p-10">
       <form>
         <div class="grid grid-cols-1 gap-2">
@@ -175,6 +188,179 @@
             </div>
           </div>
 
+          <!-- 4  -->
+
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs select-primary select-sm"
+                onchange="calculate(4)"
+                id="runlevel4"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs input-primary input-sm"
+                oninput="calculate(4)"
+                id="runtime4"
+                value="0"
+                onblur="checkInputValue(4)"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
+                readonly
+                id="fluid4"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
+                readonly
+                id="gas4"
+              />
+            </div>
+          </div>
+
+          <!-- 5 -->
+
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs select-primary select-sm"
+                onchange="calculate(5)"
+                id="runlevel5"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs input-primary input-sm"
+                oninput="calculate(5)"
+                id="runtime5"
+                value="0"
+                onblur="checkInputValue(5)"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
+                readonly
+                id="fluid5"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
+                readonly
+                id="gas5"
+              />
+            </div>
+          </div>
+
+          <!-- 6 -->
+
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs select-primary select-sm"
+                onchange="calculate(6)"
+                id="runlevel6"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs input-primary input-sm"
+                oninput="calculate(6)"
+                id="runtime6"
+                value="0"
+                onblur="checkInputValue(6)"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
+                readonly
+                id="fluid6"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
+                readonly
+                id="gas6"
+              />
+            </div>
+          </div>
+
+          <!-- 7 -->
+
+          <!-- 8 -->
+
+          <!-- 9 -->
+
+          <!-- 10 -->
+
           <!-- TOTALS -->
           <div class="divider"></div>
 
@@ -281,7 +467,14 @@
 
     function totals() {
       let totalFluid = 0;
-      let fluidIDs = ["fluid1", "fluid2", "fluid3"];
+      let fluidIDs = [
+        "fluid1",
+        "fluid2",
+        "fluid3",
+        "fluid4",
+        "fluid5",
+        "fluid6",
+      ];
       for (let i = 0; i < fluidIDs.length; i++) {
         const input = document.getElementById(fluidIDs[i]);
         const value = input && input.value ? parseFloat(input.value) : 0;
@@ -289,7 +482,7 @@
       }
 
       let totalGas = 0;
-      let gasIDs = ["gas1", "gas2", "gas3"];
+      let gasIDs = ["gas1", "gas2", "gas3", "gas4", "gas5", "gas6"];
       for (let i = 0; i < gasIDs.length; i++) {
         const input = document.getElementById(gasIDs[i]);
         const value = input && input.value ? parseFloat(input.value) : 0;
