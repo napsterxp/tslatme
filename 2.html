@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-base-200">
+    <div class="p-10">
+      <form>
+        <div class="grid grid-cols-1 gap-2">
+          <!-- 1 -->
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs"
+                onchange="calculate(1)"
+                id="runlevel1"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                onkeyup="calculate(1)"
+                id="runtime1"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="fluid1"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gas1"
+              />
+            </div>
+          </div>
+
+          <!-- 2    -->
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs"
+                onchange="calculate(2)"
+                id="runlevel2"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                onkeyup="calculate(2)"
+                id="runtime2"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="fluid2"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gas2"
+              />
+            </div>
+          </div>
+
+          <!-- 3 -->
+
+          <div class="grid grid-cols-4 gap-2">
+            <div>
+              <label class="label">
+                <span class="label-text">Run Level (%)</span>
+              </label>
+              <select
+                class="select select-bordered w-full max-w-xs"
+                onchange="calculate(3)"
+                id="runlevel3"
+              >
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Run Time (hours)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                onkeyup="calculate(3)"
+                id="runtime3"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Fluid Used (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="fluid3"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Gas Used (kg)</span>
+              </label>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gas3"
+              />
+            </div>
+          </div>
+
+          <!-- TOTALS -->
+          <div class="divider"></div>
+
+          <div class="grid grid-cols-4 gap-2">
+            <div></div>
+            <div></div>
+            <div>
+              <label class="label">
+                <span class="label-text">Total Fluid (ml)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="totalFluid"
+              />
+            </div>
+            <div>
+              <label class="label">
+                <span class="label-text">Total Gas (kg)</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="totalGas"
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-4 gap-2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>
+              <label class="label">
+                <span class="label-text">No. standard TSL cylinders</span>
+              </label>
+              <input
+                type="number"
+                class="input input-bordered w-full max-w-xs"
+                readonly
+                id="gasCylinders"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    //  RL   |   Fluid  |   Gas
+    //--------------------------------
+    //  25   |   27.5   |   0.09
+    //  50   |   55     |   0.18
+    //  75   |   77.5   |   0.27
+    //  100  |   100    |   0.36
+
+    function calculate(i) {
+      //get runtime from specific cue's runtime input
+      let runtime = parseInt(document.getElementById(`runtime` + i).value);
+      console.log(`runtime ` + i + ` = ` + runtime);
+
+      //get run level from specific cue's run level select input
+      let runlevel = parseInt(document.getElementById(`runlevel` + i).value);
+      console.log(`runlevel ` + i + ` = ` + runlevel);
+
+      // if RT > 1 -> calculate
+      if (runtime < 1) {
+        return;
+      } else {
+        let fluidused;
+        let gasused;
+        switch (runlevel) {
+          case 25:
+            fluidused = 27.5 * runtime;
+            gasused = 0.09 * runtime;
+            break;
+          case 50:
+            fluidused = 55 * runtime;
+            gasused = 0.18 * runtime;
+            break;
+          case 75:
+            fluidused = 77.5 * runtime;
+            gasused = 0.27 * runtime;
+            break;
+          case 100:
+            fluidused = 100 * runtime;
+            gasused = 0.36 * runtime;
+            break;
+        }
+        console.log({ fluidused });
+        console.log({ gasused });
+        //put fluid and gas values back in specific cue's output boxes
+
+        document.getElementById(`fluid` + i).value = fluidused;
+        document.getElementById(`gas` + i).value = gasused;
+      }
+    }
+  </script>
+</html>

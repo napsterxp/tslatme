@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <label for="runLevel1">Run Level 1</label>
+
+    <select name="runLevel1" id="runLevel1" onchange="calculate1RL">
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="75">75</option>
+      <option value="100">100</option>
+    </select>
+
+    <label for="runTime1">Run Time 1 (hours)</label>
+
+    <input
+      class="input w-full max-w-xs"
+      type="number"
+      id="runTime1"
+      id="runTime1"
+      onkeyup="calculate1RT()"
+    />
+
+    <label for="fluid1">Fluid</label>
+    <input
+      class="input w-full max-w-xs"
+      type="number"
+      readonly
+      id="fluid1"
+      name="fluid1"
+    />
+
+    <label for="gas1">Gas</label>
+    <input
+      class="input w-full max-w-xs"
+      type="number"
+      readonly
+      id="gas1"
+      name="gas1"
+    />
+  </body>
+
+  <script>
+    function calculate1RT() {
+      let runtime = parseInt(document.getElementById("runTime1").value);
+      let runLevel = parseInt(document.getElementById("runLevel1").value);
+      if (runtime < 1) {
+        return;
+      } else {
+        let fluidUsed1;
+        let gasUsed1;
+        switch (runLevel) {
+          case 25:
+            fluidUsed1 = 27.5 * runtime;
+            gasUsed1 = 0.09 * runtime;
+            break;
+          case 50:
+            fluidUsed1 = 55 * runtime;
+            gasUsed1 = 0.18 * runtime;
+            break;
+          case 75:
+            fluidUsed1 = 77.5 * runtime;
+            gasUsed1 = 0.27 * runtime;
+            break;
+          case 100:
+            fluidUsed1 = 100 * runtime;
+            gasUsed1 = 0.36 * runtime;
+            break;
+        }
+        console.log({ fluidUsed1 });
+        console.log({ gasUsed1 });
+        document.getElementById("fluid1").value = fluidUsed1;
+        document.getElementById("gas1").value = gasUsed1;
+      }
+    }
+
+    //  RL   |   Fluid  |   Gas
+    //--------------------------------
+    //  25   |   27.5   |   0.09
+    //  50   |   55     |   0.18
+    //  75   |   77.5   |   0.27
+    //  100  |   100    |   0.36
+
+    function calculate1RL() {
+      let runtime = parseInt(document.getElementById("runTime1").value);
+      let runLevel = parseInt(document.getElementById("runlevel1").value);
+      if (runtime < 1) {
+        return;
+      } else {
+        let fluidUsed1;
+        let gasUsed1;
+        switch (runLevel) {
+          case 25:
+            fluidUsed1 = 27.5 * runtime;
+            gasUsed1 = 0.09 * runtime;
+            break;
+          case 50:
+            fluidUsed1 = 55 * runtime;
+            gasUsed1 = 0.18 * runtime;
+            break;
+          case 75:
+            fluidUsed1 = 77.5 * runtime;
+            gasUsed1 = 0.27 * runtime;
+            break;
+          case 100:
+            fluidUsed1 = 100 * runtime;
+            gasUsed1 = 0.36 * runtime;
+            break;
+        }
+        console.log({ fluidUsed1 });
+      }
+    }
+  </script>
+</html>
