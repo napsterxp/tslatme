@@ -19,7 +19,7 @@
                 <span class="label-text">Run Level (%)</span>
               </label>
               <select
-                class="select select-bordered w-full max-w-xs"
+                class="select select-bordered w-full max-w-xs select-primary select-sm"
                 onchange="calculate(1)"
                 id="runlevel1"
               >
@@ -35,7 +35,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-primary input-sm"
                 onkeyup="calculate(1)"
                 id="runtime1"
               />
@@ -46,7 +46,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
                 readonly
                 id="fluid1"
               />
@@ -57,7 +57,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
                 readonly
                 id="gas1"
               />
@@ -71,7 +71,7 @@
                 <span class="label-text">Run Level (%)</span>
               </label>
               <select
-                class="select select-bordered w-full max-w-xs"
+                class="select select-bordered w-full max-w-xs select-primary select-sm"
                 onchange="calculate(2)"
                 id="runlevel2"
               >
@@ -87,7 +87,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-primary input-sm"
                 onkeyup="calculate(2)"
                 id="runtime2"
               />
@@ -98,7 +98,7 @@
               </label>
               <input
                 type="text"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
                 readonly
                 id="fluid2"
               />
@@ -109,7 +109,7 @@
               </label>
               <input
                 type="text"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
                 readonly
                 id="gas2"
               />
@@ -124,7 +124,7 @@
                 <span class="label-text">Run Level (%)</span>
               </label>
               <select
-                class="select select-bordered w-full max-w-xs"
+                class="select select-bordered w-full max-w-xs select-primary select-sm"
                 onchange="calculate(3)"
                 id="runlevel3"
               >
@@ -140,7 +140,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-primary input-sm"
                 onkeyup="calculate(3)"
                 id="runtime3"
               />
@@ -151,7 +151,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
                 readonly
                 id="fluid3"
               />
@@ -162,7 +162,7 @@
               </label>
               <input
                 type="text"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-warning input-sm"
                 readonly
                 id="gas3"
               />
@@ -181,7 +181,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-success input-sm"
                 readonly
                 id="totalFluid"
               />
@@ -192,7 +192,7 @@
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-success input-sm"
                 readonly
                 id="totalGas"
               />
@@ -202,16 +202,22 @@
             <div></div>
             <div></div>
             <div></div>
-            <div>
+            <div class="form-control">
               <label class="label">
                 <span class="label-text">No. standard TSL cylinders</span>
               </label>
               <input
                 type="number"
-                class="input input-bordered w-full max-w-xs"
+                class="input input-bordered w-full max-w-xs input-success input-sm"
                 readonly
                 id="gasCylinders"
               />
+              <label class="label">
+                <span class="label-text text-danger"
+                  >Note: TSL stock "VB" sized cylinders. They weigh approx. 22KG
+                  with 6KG of CO2 inside.
+                </span>
+              </label>
             </div>
           </div>
         </div>
@@ -228,7 +234,7 @@
 
     function calculate(i) {
       //get runtime from specific cue's runtime input
-      let runtime = parseInt(document.getElementById(`runtime` + i).value);
+      let runtime = parseFloat(document.getElementById(`runtime` + i).value);
       console.log(`runtime ` + i + ` = ` + runtime);
 
       //get run level from specific cue's run level select input
@@ -236,36 +242,58 @@
       console.log(`runlevel ` + i + ` = ` + runlevel);
 
       // if RT > 1 -> calculate
-      if (runtime < 1) {
-        return;
-      } else {
-        let fluidused;
-        let gasused;
-        switch (runlevel) {
-          case 25:
-            fluidused = 27.5 * runtime;
-            gasused = 0.09 * runtime;
-            break;
-          case 50:
-            fluidused = 55 * runtime;
-            gasused = 0.18 * runtime;
-            break;
-          case 75:
-            fluidused = 77.5 * runtime;
-            gasused = 0.27 * runtime;
-            break;
-          case 100:
-            fluidused = 100 * runtime;
-            gasused = 0.36 * runtime;
-            break;
-        }
-        console.log({ fluidused });
-        console.log({ gasused });
-        //put fluid and gas values back in specific cue's output boxes
 
-        document.getElementById(`fluid` + i).value = fluidused;
-        document.getElementById(`gas` + i).value = gasused;
+      let fluidused;
+      let gasused;
+      switch (runlevel) {
+        case 25:
+          fluidused = 27.5 * runtime;
+          gasused = 0.09 * runtime;
+          break;
+        case 50:
+          fluidused = 55 * runtime;
+          gasused = 0.18 * runtime;
+          break;
+        case 75:
+          fluidused = 77.5 * runtime;
+          gasused = 0.27 * runtime;
+          break;
+        case 100:
+          fluidused = 100 * runtime;
+          gasused = 0.36 * runtime;
+          break;
       }
+      console.log({ fluidused });
+      console.log({ gasused });
+      //put fluid and gas values back in specific cue's output boxes
+
+      document.getElementById(`fluid` + i).value = fluidused;
+      document.getElementById(`gas` + i).value = gasused;
+
+      totals();
+    }
+
+    function totals() {
+      let totalFluid = 0;
+      let fluidIDs = ["fluid1", "fluid2", "fluid3"];
+      for (let i = 0; i < fluidIDs.length; i++) {
+        const input = document.getElementById(fluidIDs[i]);
+        const value = input && input.value ? parseFloat(input.value) : 0;
+        totalFluid += value;
+      }
+
+      let totalGas = 0;
+      let gasIDs = ["gas1", "gas2", "gas3"];
+      for (let i = 0; i < gasIDs.length; i++) {
+        const input = document.getElementById(gasIDs[i]);
+        const value = input && input.value ? parseFloat(input.value) : 0;
+        totalGas += value;
+      }
+
+      let cylinders = Math.ceil(totalGas);
+      document.getElementById("totalFluid").value = totalFluid;
+      document.getElementById("totalGas").value = totalGas;
+      document.getElementById("gasCylinders").value = cylinders;
     }
   </script>
 </html>
